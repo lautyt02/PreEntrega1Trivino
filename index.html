@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
     <script defer src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <!-- <script defer src="main.js"></script> -->
+    <script defer src="/js/main.js"></script>
 </head>
 
 <body>
@@ -20,26 +20,26 @@
                 PreEntrega3Triviño
             </div>
             <a href="/pages/crear-proyecto.html"><button type="button" class="btn btn-primary">Crear un Proyecto</button></a>
-            <button type="button" class="btn btn-primary">Eliminar todos los Proyectos</button>
-            <button type="button" class="btn btn-primary">Eliminar Último Proyecto</button>
-            <button type="button" class="btn btn-primary">Mostrar/Ocultar todos los Proyectos</button>
+            <button type="button" class="btn btn-primary" id="btn-el-todo">Eliminar todos los Proyectos</button>
+            <button type="button" class="btn btn-primary" id="btn-el-ult">Eliminar Último Proyecto</button>
+            <button type="button" class="btn btn-primary" id="btn-most-ocul">Mostrar/Ocultar todos los Proyectos</button>
         </div>
     </nav>
 
     <section class="mensajes">
-        <h2 class="titulo-mensaje">Mensajes</h2>
-        <p class="contenido-mensaje">Acá va el contenido del mensaje</p>
+        <h2 id="titulo-mensaje">Mensajes</h2>
+        <p id="contenido-mensaje">Acá va el contenido del mensaje</p>
 
     </section>
     <section class="filtrado">
         <div class="find-filter">
             <p>Find</p>
-            <input type="radio" name="find/filter" id="find-rad-id" value="Find">
+            <input type="radio" name="find/filter" id="find-rad-id" value="Find" checked="checked">
             <p>Filter</p>
             <input type="radio" name="find/filter" id="filter-rad-id" value="Filter">
         </div>
         <div class="search-bar">
-            <input type="text" name="searhc" id="search-id">
+            <input type="text" name="search" id="search-id">
         </div>
     </section>
     <section class="proyectos">
