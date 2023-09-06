@@ -8,6 +8,13 @@ a {
   text-decoration: none;
 }
 
+.invisible {
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  display: none;
+}
+
 .navbar {
   padding-left: 60px;
   background-color: rgb(113, 195, 113);
@@ -42,6 +49,7 @@ section {
 }
 
 .tarjeta-proyecto {
+  margin-bottom: 15px;
   padding: 10px 15px;
   border-style: solid;
   border-color: black;
