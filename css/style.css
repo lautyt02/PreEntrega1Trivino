@@ -28,12 +28,12 @@ section {
   background-color: rgb(199, 97, 30);
 }
 
-.filtrado {
+.filtrado, .formulario-proyecto {
   display: flex;
   flex-direction: row;
   background-color: rgb(91, 238, 233);
 }
-.filtrado #search-id {
+.filtrado #search-id, .formulario-proyecto #search-id {
   margin: 50px;
 }
 
