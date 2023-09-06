@@ -37,7 +37,7 @@ let radFind=document.getElementById("find-rad-id")
 let radFilter=document.getElementById("filter-rad-id")
 let searchBar=document.getElementById("search-id")
 //Sección Proyectos
-let seccionProyectos=document.querySelector("proyectos")
+let seccionProyectos=document.querySelector(".proyectos")
 
 // Event Listeners
 // Botones
@@ -48,7 +48,17 @@ btnMostrarOcultarP.addEventListener("click", mostrarOcultar)
 searchBar.addEventListener("input", buscar)
 
 //Pagina de Crear Proyecto
+//Traer Elementos del DOM
+let formulario=document.getElementById("formulario-crear-proyecto")
+// let inputNombre=document.getElementById("nombre-id")
+// let inputDescripcion=document.getElementById("descripcion-id")
+// let checkLenguajes=document.getElementsByName("lenguajes")
+// let checkCategorias=document.getElementsByName("categorias")
+// let enlaceGitHub=getElementById("github-link-id")
+// let enlaceGitLab=getElementById("gitlab-link-id")
 
+// Event Listeners
+formulario.addEventListener("submit", anadirProyecto)
 
 // Definición de variables
 // let listaProyectos = [new Proyecto(0,"proyecto-1","proyecto de prueba 1", "html, css, javascript","pagina web","https://github.com/lautyt02","https://gitlab.com/lautyt02" ),
@@ -174,4 +184,8 @@ function buscar(){
 
     tituloMensaje.innerText="Mensaje de Prueba"
     contenidoMensaje.innerText=`Estas Tipeando \n Estado Find ${radios[0].checked} \n Estado Filter ${radios[1].checked}`
+}
+function anadirProyecto(){
+    let contenedor=document.querySelector(".formulario-proyecto")
+    contenedor.innerText=`Se añadio proyecto`
 }
