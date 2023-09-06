@@ -27,7 +27,6 @@ class Proyecto {
 let btnCrearP = document.getElementById("btn-crear-proyecto")
 let btnEliminarTodosP = document.getElementById("btn-el-todo")
 let btnEliminarUltP = document.getElementById("btn-el-ult")
-let btnMostrarOcultarP = document.getElementById("btn-most-ocul")
 // Sección Mensajes
 let tituloMensaje = document.getElementById("titulo-mensaje")
 let contenidoMensaje = document.getElementById("contenido-mensaje")
@@ -54,7 +53,6 @@ let btnForm = document.getElementById("btn-form-id")
 btnCrearP.addEventListener("click", anadirProyecto)
 btnEliminarTodosP.addEventListener("click", eliminarTodos)
 btnEliminarUltP.addEventListener("click", eliminarUltimo)
-btnMostrarOcultarP.addEventListener("click", mostrarOcultar)
 // Search Bar
 searchBar.addEventListener("input", buscar)
 // Formulario
@@ -184,12 +182,7 @@ function eliminarUltimo() {
     tituloMensaje.innerText = "Mensaje de Prueba"
     contenidoMensaje.innerText = `Eliminar Último`
 }
-function mostrarOcultar() {
 
-    tituloMensaje.innerText = "Mensaje de Prueba"
-    contenidoMensaje.innerText = `Mostrar/Ocultar`
-
-}
 function buscar() {
     let radios = document.getElementsByName("find/filter")
     if (radios[0].checked) {
