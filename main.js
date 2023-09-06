@@ -1,36 +1,55 @@
-// Definición de variables y constantes 
-let long = definirLong()
-let miArreglo = crearArreglo(long)
+//clase Proyecto
+class Proyecto {
+    constructor(id, nombre, descripcion, lenguajes, categorias, linkGitHub, linkGitLab){
+        this.id=id
+        this.nombre=nombre
+        this.descripcion=descripcion
+        this.lenguajes=lenguajes
+        this.categorias=categorias
+        this.linkGitHub=linkGitHub
+        this.linkGitLab=linkGitLab
+    }
+    imprimirProyecto(){
+        // let listaLenguajes="Lenguajes utilizados: "
+        // for(let i=0;i<this.lenguajes.length;i++){
+        //     listaLenguajes =listaLenguajes+this.lenguajes[i]+"; "
+        // }
+        // let listaCategorias="Categorias: "
+        // for(let i=0;i<this.categorias.length;i++){
+        //     listaCategorias+=`${this.categorias[i]}; `
+        // }
+        return `${this.nombre}\n ${this.descripcion}\n id: ${this.id}\n Lenguajes utilizados: ${this.lenguajes}\n Categorias: ${this.categorias}\n link a GitHub: ${this.linkGitHub}\n link a GitLab: ${this.linkGitLab}\n\n`
+    }
+}
+// Definición de variables
+let listaProyectos = [new Proyecto(0,"proyecto-1","proyecto de prueba 1", "html, css, javascript","pagina web","https://github.com/lautyt02","https://gitlab.com/lautyt02" ),
+new Proyecto(1,"proyecto-2","proyecto de prueba 2", "html, css, javascript","pagina web","https://github.com/lautyt02","https://gitlab.com/lautyt02" ),
+new Proyecto(2,"proyecto-3","proyecto de prueba 3", "rust","aplicación, criptomonedas","https://github.com/lautyt02","https://gitlab.com/lautyt02" ),]
 // Inicio programa
-let ejectutar = true
-while(ejectutar){
+let ejecutar = true
+while(ejecutar){
     let opcion = validarInputNumero(`En el siguiente promt, ingrese una de las siguientes opciones: \n
-    \t 1 para cambiar datos \t 2 para calcular el promedio \n
-    \t 3 para calcular el máximo \t 4 para calcular el mínimo  \n
-    \t 5 para imprimir en orden ascendente \t 6 para imprimir en orden descendente \t 7 para finalizar la ejecución`,false)
+    \t 1 Filtrado \t 2 Busqueda por Nombre \n
+    \t 3 para añadir un proyecto \n
+    \t 5 Listar todos los Proyectos \t 6 Finalizar Ejecucuión`)
     switch (opcion){
         case 1:
-            long = definirLong()
-            miArreglo=crearArreglo(long)
+            let atributoFiltro = ingresarTexto("Ingrese el atributo por el que desea filtrar")
+            let valorFiltro = ingresarTexto("Ingrese el valor del atributo por el que desea filtrar")
+            filtrar(listaProyectos,atributoFiltro,valorFiltro)
             break
         case 2:
-            calcularPromedio(miArreglo)
+            let nombreAbuscar = ingresarTexto("Ingrese el nombre del proyecto que busca:")
+            buscarNombre(listaProyectos,nombreAbuscar)
             break
         case 3:
-            calcularMaximo(miArreglo)
-            break
-        case 4:
-            calcularMinimo(miArreglo)
+            anadirProyecto(listaProyectos)
             break
         case 5:
-            imprimir(miArreglo)
+            console.log(imprimirTodos(listaProyectos))
             break
         case 6:
-            imprimirReverso(miArreglo)
-            break
-        case 7:
-            ejectutar = false
-            console.log("Ejecucuión Finalizada")
+            ejecutar = false
             break
         default:
             console.log(`No existe acción para el número ${opcion}, intente de nuevo`)
@@ -38,87 +57,71 @@ while(ejectutar){
     }
 }
 // Definición de funciones
-function validarInputNumero(texto, decimalesYnegativos) {
+function validarInputNumero(texto) {
     let valorValido=false
     while(!valorValido){
         let numero=prompt(texto)
-        let condicion = !isNaN(numero)
-        if(!decimalesYnegativos){
-            condicion = condicion && ((numero | 0) == numero)
-            condicion = condicion  && (numero>0)
-        }
-        if(condicion){
+        let condicion = !isNaN(numero) //Chequear que sea un número
+        condicion = condicion && ((numero | 0) == numero) //chequear que sea entero
+        condicion = condicion  && (numero>0)  //Chequear que sea positivo
+        if(condicion){ //Chequear las 3 condiciones
             valorValido=true
-            if(decimalesYnegativos){
-                return parseFloat(numero)
-            }
-            else {
-                return parseInt(numero)
-            }
+            return parseInt(numero)
         }
         else {
-            console.log("Valor invalido, intente de nuevo")
+            console.log("Debe ingresar un número entero positivo, intente de nuevo")
         }
     } 
 }
-function crearArreglo(longitud){
-    let arreglo = []
-    for(i=0; i<longitud; i++){
-        console.log(`valor ${i+1} de ${longitud}`)
-        arreglo[i]=validarInputNumero("Ingrese un valor numerico",true)
-        console.log(arreglo[i])
-    }
-    return arreglo
-}
-function calcularPromedio(arreglo){
-    let longitud = arreglo.length
-    let suma = 0
-    for (i=0; i<longitud; i++){
-        suma += arreglo[i]
-    }
-    console.log(`El promedio es: ${suma/longitud}`) 
-}
-function definirLong(){
-    let longitud = validarInputNumero("Ingrese la cantidad de elementos (Número Entero mayor a 0)",false)
-    console.log(`Longitud del arreglo: ${longitud}`)
-    return longitud
-}
-function calcularMaximo(arreglo){
-    let longitud = arreglo.length
-    let maximo = arreglo[0]
-    let posicionMax = 0
-    for (i=0; i<longitud; i++){
-        if(arreglo[i]>maximo){
-            maximo=arreglo[i]
-            posicionMax=i
+function ingresarTexto(texto) {
+    let valorValido=false
+    while(!valorValido){
+        textoIngresado = prompt(texto)
+        condicionUno= typeof textoIngresado === 'string'
+        condicionDos = textoIngresado instanceof String
+        if (condicionUno || condicionDos){
+            valorValido = true
+            return textoIngresado.toLowerCase()
+        }
+        else{
+            console.log("Debe ingresar un Texto, intente de nuevo")
         }
     }
-    console.log(`El valor máximo es: ${maximo} y está en la posición ${posicionMax}`)
+
 }
-function calcularMinimo(arreglo){
-    let longitud = arreglo.length
-    let minimo = arreglo[0]
-    let posicionMin = 0
-    for (i=0; i<longitud; i++){
-        if(arreglo[i]<minimo){
-            minimo=arreglo[i]
-            posicionMin=i
-        }
+function filtrar(arreglo, atributo, valor){
+    let arregloFlitrado = arreglo.filter((el)=>el[atributo].includes(valor))
+    textoAimprimir = `Los Proyectos que coinciden con los criterios de filtrado son: \n`
+    for(let i=0;i<arregloFlitrado.length;i++){
+        textoAimprimir += arregloFlitrado[i].imprimirProyecto()
     }
-    console.log(`El valor mínimo es: ${minimo} y está en la posición ${posicionMin}`)
+    console.log(textoAimprimir)
 }
-function imprimir(arreglo) {
-    console.log('Imprimir en orden ascendente')
-    let longitud = arreglo.length
-    for (i=0; i<longitud; i++){
-        console.log(`El valor en la posición: ${i} es: ${arreglo[i]}`)
+function buscarNombre(arreglo, nombreBuscado){
+    let resultadoBusqueda = arreglo.find((el)=>el.nombre === nombreBuscado) 
+    if(typeof resultadoBusqueda === "undefined"){
+        console.log("Ningún proyecto coincido con los criterios de Búsqueda")
+    }
+    else{
+        let textoAimprimir = `Resultado de Búsqueda:  \n`+resultadoBusqueda.imprimirProyecto()
+        console.log(textoAimprimir)
     }
 }
-function imprimirReverso(arreglo){
-    console.log('Imprimir en orden descendente')
-    let longitud = arreglo.length
-    for (i=0; i<longitud; i++){
-        let posicion = longitud - (1+i)
-        console.log(`El valor en la posición: ${posicion} es: ${arreglo[posicion]}`)
+function anadirProyecto(arreglo){
+    let id = arreglo[arreglo.length-1].id+1
+    let nombre = ingresarTexto("Ingrese el Nombre del Proyecto")
+    let descripcion = ingresarTexto("Ingrese una descripción para el Proyecto")
+    let lenguajes="rust"
+    let categorias="aplicación"
+    let linkGitHub="https://github.com/lautyt02"
+    let linkGitLab="https://gitlab.com/lautyt02"
+    arreglo.push(new Proyecto(id, nombre, descripcion, lenguajes, categorias, linkGitHub, linkGitLab))
+}
+
+function imprimirTodos(arreglo){
+    textoAimprimir = `Lista de Proyectos: \n`
+    for(let i=0;i<arreglo.length;i++){
+        textoAimprimir += arreglo[i].imprimirProyecto()
     }
+    return textoAimprimir
 }
