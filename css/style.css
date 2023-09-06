@@ -12,18 +12,35 @@ body {
   font-weight: 700;
 }
 
-.mensajes {
-  margin: 15px;
+section {
+  margin: 15px 25px;
   padding: 25px 50px;
   border-radius: 15px;
+}
+
+.mensajes {
   background-color: rgb(199, 97, 30);
 }
 
+.filtrado {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(91, 238, 233);
+}
+.filtrado #search-id {
+  margin: 50px;
+}
+
 .proyectos {
-  margin: 15px;
-  padding: 25px 50px;
-  border-radius: 15px;
   background-color: rgb(91, 115, 238);
+}
+
+.tarjeta-proyecto {
+  padding: 10px 15px;
+  border-style: solid;
+  border-color: black;
+  border-width: 2px;
+  border-radius: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */
