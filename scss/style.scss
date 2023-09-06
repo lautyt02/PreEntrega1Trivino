@@ -4,7 +4,12 @@ body{
     font-size: $font-size;
     background-color: rgb(155, 155, 255);
 }
+a{
+    color: black;
+    text-decoration:none;
+}
 .navbar{
+    padding-left: 60px;
     background-color: rgb(113, 195, 113);
 }
 .navbar-brand{
@@ -37,3 +42,6 @@ section{
     border-width: 2px;
     border-radius: 15px;
 }
+// #crear-proyecto-navbar{
+//     padding: 0px 100px;
+// }

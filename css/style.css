@@ -3,7 +3,13 @@ body {
   background-color: rgb(155, 155, 255);
 }
 
+a {
+  color: black;
+  text-decoration: none;
+}
+
 .navbar {
+  padding-left: 60px;
   background-color: rgb(113, 195, 113);
 }
 
