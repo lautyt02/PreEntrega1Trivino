@@ -1,2 +1,2 @@
-# PreEntrega2Trivino
-PreEntrega 2 Lautaro Triviño curso JavaScript de Coderhouse
+# PreEntrega3Trivino
+PreEntrega 3 Lautaro Triviño curso JavaScript de Coderhouse
