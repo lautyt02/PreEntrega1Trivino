@@ -1,0 +1,5 @@
+[
+    {"id":0,"nombre":"Homebanking","descripcion":"Simulación de Homebanking con registro y login de usuarios, cotizaciones del dolar obtenidas de una API y solicitud de préstamos.","lenguajes":["python","css","html","javascript"],"categorias":["pagina web"],"linkGitHub":"https://google.com","linkGitLab":"https://google.com"},
+    {"id":1,"nombre":"FHierro's Web","descripcion":"Página web de negocio local de Bariloche, que se dedica a Herrería y Soldadura. La página permite ver información básica y de contacto del negocio, así como también una lista de los productos y servicios ofrecidos. ","lenguajes":["css","html"],"categorias":["pagina web"],"linkGitHub":"https://google.com","linkGitLab":"https://google.com"},
+    {"id":2,"nombre":"Proyecto Final Curso JS","descripcion":"Entrega Final del curso de JS de coderhouse. Contiene Bootstrap y SASS, manejo dinamico del DOM, uso de localStorage, uso de métodos de arrays, lectura de archivo JSON con fetch y sintaxis async await.","lenguajes":["css","html","javascript"],"categorias":["pagina web","aplicacion"],"linkGitHub":"https://github.com/lautyt02/PreEntrega1Trivino","linkGitLab":"http://pf-js-trivino.free.nf"}
+]

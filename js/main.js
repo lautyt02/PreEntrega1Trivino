@@ -40,8 +40,10 @@ let enlaceGitLab = document.getElementById("gitlab-link-id")
 btnCrearP.addEventListener("click", anadirProyecto)
 btnEliminarTodosP.addEventListener("click", eliminarTodos)
 btnEliminarUltP.addEventListener("click", eliminarUltimo)
-// Search Bar
+// Search
 searchBar.addEventListener("input", buscar)
+radFilter.addEventListener("change",buscar)
+radFind.addEventListener("change",buscar)
 // Formulario
 btnForm.addEventListener("click", subirProyecto)
 
@@ -50,92 +52,64 @@ let listaProyectos = []
 
 // Inicio del programa
 obtenerLS()
-imprimir(listaProyectos)
+imprimirTodos()
+obtenerJSON()
 
 // Definicion de Funciones
 function eliminarTodos() {
     listaProyectos = []
     localStorage.clear()
-    imprimir(listaProyectos)
-    mostrarToast("Todos los Proyectos Fueron Eliminados",1000)
+    imprimirTodos()
+    mostrarToast("Todos los Proyectos Fueron Eliminados", 1000)
 }
 function eliminarUltimo() {
     localStorage.clear()
     listaProyectos.pop()
     guardarLS()
     seccionProyectos.innerHTML = `<h2 id="titulo-proyectos">Lista de Proyectos</h2>`
-    imprimir(listaProyectos)
-    mostrarToast("Se Elimino El Último Proyecto",1000)
+    imprimirTodos()
+    mostrarToast("Se Elimino El Último Proyecto", 1000)
 }
 
 function buscar() {
+    searchBar.focus()
     let radios = document.getElementsByName("find/filter")
-    if (radios[0].checked) {
-        encontrarNombre(listaProyectos, searchBar.value)
-    }
-    else {
-        filtrar(listaProyectos, "nombre", searchBar.value)
-    }
+    radios[0].checked ? encontrarNombre(listaProyectos, searchBar.value) : filtrar(listaProyectos, "nombre", searchBar.value)
 }
 function filtrar(arreglo, atributo, valor) {
-        let arregloFlitrado = arreglo.filter((el) => el[atributo].includes(valor))
-    if (arregloFlitrado.length == 0) {
-        seccionProyectos.innerHTML = `<h2 id="titulo-proyectos">Ningún proyecto coincide con los criterios de Búsqueda</h2>`
-    }
-    else {
-        seccionProyectos.innerHTML = `<h2 id="titulo-proyectos">Los Proyectos que coinciden con los criterios de filtrado son:</h2>`
-        imprimir(arregloFlitrado)
-    }
+    let arregloFlitrado = arreglo.filter((el) => el[atributo].includes(valor))
+    arregloFlitrado.length == 0 ? imprimir("Ningún proyecto coincide con los criterios de Búsqueda", []) : imprimir("Los Proyectos que coinciden con los criterios de filtrado son:", arregloFlitrado)
 }
 function encontrarNombre(arreglo, nombreBuscado) {
     let resultadoBusqueda = arreglo.find((el) => el.nombre === nombreBuscado)
-    if (typeof resultadoBusqueda === "undefined") {
-        seccionProyectos.innerHTML = `<h2 id="titulo-proyectos">Ningún proyecto coincide con los criterios de Búsqueda</h2>`
-    }
-    else {
-        seccionProyectos.innerHTML = `<h2 id="titulo-proyectos">Resultado de Búsqueda:</h2>`
-        imprimir([resultadoBusqueda])
-    }
+    typeof resultadoBusqueda === "undefined" ? imprimir("Ningún proyecto coincide con los criterios de Búsqueda", []) : imprimir("Resultado de Búsqueda:", [resultadoBusqueda])
 }
 function anadirProyecto() {
-    mostrarToast(`Complete el formulario y haga click en "Agregar Proyecto"`,3000)
-    mostrarToast("Creando Proyecto",2000)
-    if (seccionFormulario.classList.contains("invisible")) {
-        seccionFormulario.classList.remove("invisible")
-        seccionProyectos.classList.add("invisible")
-        seccionFiltrado.classList.add("invisible")
-    }
+    mostrarToast(`Complete el formulario y haga click en "Agregar Proyecto"`, 3000)
+    mostrarToast("Creando Proyecto", 2000)
+    seccionFormulario.classList.contains("invisible")
+    seccionFormulario.classList.remove("invisible")
+    seccionProyectos.classList.add("invisible")
+    seccionFiltrado.classList.add("invisible")
 }
 function subirProyecto() {
-    let id = 0
-    if (listaProyectos.length != 0) {
-        id = listaProyectos[listaProyectos.length - 1].id + 1
-    }
+    let id = listaProyectos.length != 0 ? (listaProyectos[listaProyectos.length - 1].id + 1) : 0
     let nombre = inputNombre.value
     let descripcion = inputDescripcion.value
     let lenguajes = []
-    for (lenguaje of checkLenguajes) {
-        if (lenguaje.checked) {
-            lenguajes.push(lenguaje.value)
-        }
-    }
+    checkLenguajes.forEach(lenguaje => { lenguaje.checked && lenguajes.push(lenguaje.value) })
     let categorias = []
-    for (categoria of checkCategorias) {
-        if (categoria.checked) {
-            categorias.push(categoria.value)
-        }
-    }
+    checkCategorias.forEach(categoria => { categoria.checked && categorias.push(categoria.value) })
     let linkGitHub = enlaceGitHub.value
     let linkGitLab = enlaceGitLab.value
     nuevoProyecto = new Proyecto(id, nombre, descripcion, lenguajes, categorias, linkGitHub, linkGitLab)
     listaProyectos.push(nuevoProyecto)
     guardarLS()
-    seccionProyectos.innerHTML = `<h2 id="titulo-proyectos">Lista de Proyectos</h2>`
-    imprimir(listaProyectos)
+    imprimirTodos()
     seccionFormulario.classList.add("invisible")
     seccionProyectos.classList.remove("invisible")
     seccionFiltrado.classList.remove("invisible")
-    mostrarToast("Se añadió el Proyecto",1000)
+    mostrarToast("Se añadió el Proyecto", 1000)
 }
 function guardarLS() {
     for (const proyecto of listaProyectos) {
@@ -143,28 +117,33 @@ function guardarLS() {
         localStorage.setItem(proyecto.id, proyectoJson)
     }
 }
-function imprimir(arregloProyectos) {
-    if (arregloProyectos.length == 0) {
-        seccionProyectos.innerHTML = `<h2 id="titulo-proyectos">No hay ningún proyecto guardado</h2>`
-    }
+function imprimir(titulo, arregloProyectos) {
+    seccionProyectos.innerHTML = `<h2 id="titulo-proyectos">${titulo}</h2>`
     for (const proyecto of arregloProyectos) {
         let proyectoHtml = document.createElement("div")
         proyectoHtml.classList.add("tarjeta-proyecto")
         proyectoHtml.innerHTML = `<h4>${proyecto.nombre}</h4>
         <p>${proyecto.descripcion}</p>
-        <p>Lenguajes utilizados: ${proyecto.lenguajes}</p>
+        <p>Lenguajes utilizados:${proyecto.lenguajes}</p>
+        <p>Categorías:${proyecto.categorias}</p>
         <a href="${proyecto.linkGitHub}" target="_blank">Repositorio GitHub</a>
         <a href="${proyecto.linkGitLab}" target="_blank">Repositorio GitLab</a>`
         seccionProyectos.appendChild(proyectoHtml)
     }
 }
+function imprimirTodos() {
+    imprimir(listaProyectos.length == 0 ? "No hay ningún proyecto guardado" : "Lista de Proyectos:", listaProyectos)
+}
 function obtenerLS() {
-    for (let i = 0; i < localStorage.length; i++) {
-        listaProyectos[i] = JSON.parse(localStorage.getItem(i))
+    if (localStorage.length != 0) {
+        for (let i = 0; i < localStorage.length; i++) {
+            listaProyectos[i] = JSON.parse(localStorage.getItem(i))
+        }
     }
+    mostrarToast("Proyectos obtenidos de localStorage", 1500)
 }
 
-function mostrarToast(mensaje,duracion) {
+function mostrarToast(mensaje, duracion) {
     Toastify({
         text: mensaje,
         duration: duracion,
@@ -172,3 +151,27 @@ function mostrarToast(mensaje,duracion) {
         className: "mi-toastify",
     }).showToast()
 }
+
+async function obtenerJSON() {
+    let resp = await fetch("/json/proyectos.json")
+    let data = await resp.json()
+    listaProyectos = []
+    data.forEach(proyecto => {
+        listaProyectos.push(proyecto)
+    })
+    mostrarToast("Se completó Fetch, proyectos obtenidos", 1500)
+    imprimirTodos()
+    guardarLS()
+}
+
+// async function guardarJSON() {
+//     for (const proyecto of listaProyectos) {
+//         let resp = await fetch("json/proyectos.json", {
+//             method: "POST",
+//             body: JSON.stringify(proyecto),
+//             headers:{
+//                 'Content-Type': 'application/json'
+//             },
+//         })
+//     }
+// }
