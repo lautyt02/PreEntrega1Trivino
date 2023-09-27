@@ -1,2 +1,4 @@
 # PreEntrega3Trivino
-PreEntrega 3 Lautaro Triviño curso JavaScript de Coderhouse
+Entrega Final Lautaro Triviño curso JavaScript de Coderhouse
+
+## [Link a la página](http://pf-js-trivino.free.nf/?i=1)
