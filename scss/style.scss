@@ -27,15 +27,18 @@ section{
     padding:25px 50px;
     border-radius: 15px;
 }
-.mensajes{
-    background-color: rgb(199, 97, 30);
-}
 .filtrado, .formulario-proyecto{
     display: flex;
     flex-direction: row;
     background-color: rgb(91, 238, 233);
     #search-id{
         margin: 50px;
+    }
+    .descripcion-filtrado{
+        margin: 50px 0 0 25px;
+        font-size: 1rem;
+        color: grey;
+        font-weight: $bold-weight;
     }
 }
 .proyectos{
@@ -48,4 +51,7 @@ section{
     border-color: black;
     border-width: 2px;
     border-radius: 15px;
+}
+.mi-toastify{
+    background: linear-gradient(to right, #0006b0, #c93d44);
 }

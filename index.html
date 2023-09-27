@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PreEntrega3Trivino</title>
     <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
-    <script defer src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script defer src="/js/main.js"></script>
 </head>
 
 <body>
@@ -25,11 +24,6 @@
         </div>
     </nav>
 
-    <section class="mensajes">
-        <h2 id="titulo-mensaje">Mensajes</h2>
-        <p id="contenido-mensaje">En esta sección se le mostrará información de utilidad</p>
-
-    </section>
     <section class="filtrado">
         <div class="find-filter">
             <p>Find</p>
@@ -37,10 +31,16 @@
             <p>Filter</p>
             <input type="radio" name="find/filter" id="filter-rad-id" value="Filter" checked="checked">
         </div>
+        <div>
+            <p class="descripcion-filtrado">El imput debe ser exactamente igual. Devuelve un único resultado</p>
+            <p class="descripcion-filtrado">Devuelve todos los resultados que contengan el valor del input.</p>
+        </div>
         <div class="search-bar">
             <input type="text" name="search" id="search-id">
         </div>
+        
     </section>
+
     <section class="proyectos">
         <h2 id="titulo-proyectos">Lista de Proyectos</h2>
     </section>
@@ -78,8 +78,9 @@
         </form>
     </section>
 
-
-
+    <script defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script defer src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script defer src="/js/main.js"></script>
 </body>
 
 </html>
